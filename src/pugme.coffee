@@ -20,7 +20,7 @@ module.exports = (robot) ->
         msg.send JSON.parse(body).pug
 
   robot.respond /pug bomb( (\d+))?/i, (msg) ->
-    count = msg.match[2] || 5
+    count = msg.match[2] || pugBombLimit
     if parseInt(count) > pugBombLimit
       msg.send "Sorry. That's too many pugs. Here's #{pugBombLimit} of them instead";
       count = pugBombLimit
