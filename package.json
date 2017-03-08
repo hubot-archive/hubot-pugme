@@ -1,13 +1,17 @@
 {
   "name": "hubot-pugme",
   "description": "Pugme is the most important hubot script",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Josh Nichols <technicalpickles@github.com>",
   "contributors": [
     "David Wood <david.p.wood@gmail.com> (http://www.codesleuth.co.uk/)"
   ],
   "license": "MIT",
-  "keywords": ["hubot", "hubot-scripts", "pugs"],
+  "keywords": [
+    "hubot",
+    "hubot-scripts",
+    "pugs"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/hubot-scripts/hubot-pugme.git"
