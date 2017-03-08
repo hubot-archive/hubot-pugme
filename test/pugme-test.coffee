@@ -4,16 +4,18 @@ chai.use require 'sinon-chai'
 
 expect = chai.expect
 
-describe 'pugme', ->
+describe 'pugme listens', ->
   beforeEach ->
     @robot =
       respond: sinon.spy()
-      hear: sinon.spy()
 
     require('../src/pugme')(@robot)
 
-  it 'registers a respond listener', ->
-    expect(@robot.respond).to.have.been.calledWith(/hello/)
+  it 'listens for `pug me`', ->
+    expect(@robot.respond).to.have.been.calledWith(/pug me/i)
 
-  it 'registers a hear listener', ->
-    expect(@robot.hear).to.have.been.calledWith(/orly/)
+  it 'listens for `pug bomb`', ->
+    expect(@robot.respond).to.have.been.calledWith(/pug bomb( (\d+))?/i)
+
+  it 'listens for `how many pugs are there`', ->
+    expect(@robot.respond).to.have.been.calledWith(/how many pugs are there/i)
