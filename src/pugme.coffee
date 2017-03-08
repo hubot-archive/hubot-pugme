@@ -11,21 +11,24 @@
 #   hubot pug me - Receive a pug
 #   hubot pug bomb N - get N pugs
 
+pugBaseUrl = 'http://pugme.herokuapp.com'
+urlReplace = /[0-9][0-9].media/gi
+
 module.exports = (robot) ->
 
   robot.respond /pug me/i, (msg) ->
-    msg.http("http://pugme.herokuapp.com/random")
+    msg.http("#{pugBaseUrl}/random")
       .get() (err, res, body) ->
-        msg.send JSON.parse(body).pug
+        msg.send JSON.parse(body).pug.replace(urlReplace, 'media')
 
   robot.respond /pug bomb( (\d+))?/i, (msg) ->
-    count = msg.match[2] || 5
-    msg.http("http://pugme.herokuapp.com/bomb?count=" + count)
+    count = Number(msg.match[2] || 5)
+    count = if count > 5 then 5 else count
+    msg.http("#{pugBaseUrl}/bomb?count=" + count)
       .get() (err, res, body) ->
-        msg.send pug for pug in JSON.parse(body).pugs
+        msg.send pug.replace(urlReplace, 'media') for pug in JSON.parse(body).pugs
 
   robot.respond /how many pugs are there/i, (msg) ->
-    msg.http("http://pugme.herokuapp.com/count")
+    msg.http("#{pugBaseUrl}/count")
       .get() (err, res, body) ->
         msg.send "There are #{JSON.parse(body).pug_count} pugs."
-
